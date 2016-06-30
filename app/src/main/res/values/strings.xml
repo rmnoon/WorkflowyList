@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">WorkflowyList</string>
+    <string name="help_text">Long-press on your home screen to add the widget.</string>
+
+    <!-- Main widget -->
+    <string name="refresh">Refresh</string>
+    <string name="add_item">Add Item</string>
+    <string name="empty_list">No items.</string>
+    <string name="pick_list">Select a list&#8230;</string>
+    <string name="item_bullet">&#8250;</string>
+
+    <!-- Item editor -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="item_name_hint">Enter item&#8230;</string>
+    <string name="item_note_hint">Enter note&#8230;</string>
+    <string name="add_note">Add a note</string>
+
+    <!-- Item actions -->
+    <string name="edit">Edit</string>
+    <string name="complete">Complete</string>
+    <string name="uncomplete">(Un)complete</string>
+    <string name="delete">Delete</string>
+    <string name="delete_confirm">Are you sure you want to delete this item?</string>
+
+    <!-- List picker -->
+    <string name="choose">Choose</string>
+    <string name="choose_a_list">Choose List</string>
+    <string name="path_separator_ltr">&#8250;</string>
+    <string name="path_separator_rtl">&#8249;</string>
+    <string name="root_list">Main List</string>
+    <string name="logout">Log out</string>
+    <string name="logout_confirm">Are you sure you want to log out of Workflowy?</string>
+    <string name="up">Go up a level</string>
+    <string name="empty_list_choice">Nothing on this list right now.</string>
+    <string name="empty">empty</string>
+
+    <!-- Login dialog -->
+    <string name="username_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="log_in_header">Log in to Workflowy</string>
+    <string name="show_password">Show password</string>
+    <string name="bad_network">Unable to reach Workflowy</string>
+    <string name="bad_login">Incorrect email or password</string>
+    <string name="loading">Please wait...</string>
+
+    <!-- Statuses -->
+    <string name="cant_refresh">Can\'t refresh (unable to reach Workflowy).  Check your internet connection or try again later.</string>
+    <string name="bad_login_on_refresh">Invalid email or password, please log out and log back in again.</string>
+    <string name ="refresh_success">Successfully synced with Workflowy.</string>
+    <string name="item_added">Item added.</string>
+    <string name="item_added_local">Item added locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_edited">Item edited.</string>
+    <string name="item_edited_local">Item edited locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_completed">Item completed.</string>
+    <string name="item_uncompleted">Item marked incomplete.</string>
+    <string name="item_completed_local">Item completed locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_uncompleted_local">Item marked incomplete locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_deleted">Item deleted.</string>
+    <string name="item_deleted_local">Item deleted locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+
+</resources>

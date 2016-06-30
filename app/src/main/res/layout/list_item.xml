@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12sp"
+    android:layout_marginBottom="12sp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="24sp"
+        android:text="@string/item_bullet"
+        android:layout_marginTop="6sp"
+        android:layout_marginLeft="6sp"
+        android:layout_marginRight="6sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:layout_marginBottom="12sp"
+            android:textSize="18sp"
+            android:text="Example item name" />
+
+        <TextView
+            android:id="@+id/item_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-6sp"
+            android:layout_marginBottom="12sp"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="Some description that may or may not exist." />
+    </LinearLayout>
+
+
+</LinearLayout>

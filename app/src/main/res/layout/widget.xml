@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/appwidget_dark_bg">
+
+    <LinearLayout
+        android:id="@+id/login_panel"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <Button
+            android:id="@+id/log_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/log_in"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_bar"
+        style="@style/WidgetHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:drawableLeft="@drawable/button_drop_down"
+            android:id="@+id/list_name_button"
+            style="@style/HeaderButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/pick_list"
+            android:textSize="18sp"
+            android:contentDescription="@string/pick_list"
+            android:paddingEnd="0dp"
+            />
+
+        <ImageButton
+            android:id="@+id/refresh_button"
+            style="@style/HeaderButton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/refresh"
+            android:src="@drawable/button_refresh"/>
+
+        <ImageButton
+            android:id="@+id/add_item_button"
+            style="@style/HeaderButton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/add_item"
+            android:src="@drawable/button_add"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_items"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:text="@string/empty_list"
+        android:textSize="20sp" />
+
+</LinearLayout>

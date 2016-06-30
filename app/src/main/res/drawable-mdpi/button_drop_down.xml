@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:drawable="@drawable/ic_arrow_drop_down_black_24dp" /> <!-- pressed -->
+
+    <item android:state_focused="true"
+        android:drawable="@drawable/ic_arrow_drop_down_white_24dp" /> <!-- focused -->
+
+    <item android:drawable="@drawable/ic_arrow_drop_down_white_24dp" /> <!-- default -->
+</selector>
