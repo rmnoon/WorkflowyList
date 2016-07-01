@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/widget_margin"
+    android:layout_width="@dimen/widget_width"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings"/>
+
+            <TextView
+                android:id="@+id/settings_breadcrumbs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                tools:text="Parent 1 > Child of parent 1 > Child 2"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/settings_header"
+                android:textAppearance="@android:style/TextAppearance.Material.DialogWindowTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                tools:text="Picked Item"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="@color/colorDivider" />
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="@string/refresh"/>
+
+    <Button
+        android:id="@+id/show_completed_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/show_completed"/>
+
+    <Button
+        android:id="@+id/choose_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:textColor="@color/colorPrimaryText"
+        android:text="@string/choose_a_list"/>
+
+    <Button
+        android:id="@+id/voice_command_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/enable_voice"/>
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/logout"/>
+
+
+
+</LinearLayout>

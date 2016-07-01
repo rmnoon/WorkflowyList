@@ -76,35 +76,6 @@ public class ListPickerDialogActivity extends Activity {
             }
         });
 
-        findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(ListPickerDialogActivity.this)
-                        .setTitle(R.string.logout)
-                        .setMessage(R.string.logout_confirm)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                ListPickerDialogActivity.this.finish();
-                                fireEvent(
-                                        getApplicationContext(),
-                                        appWidgetId,
-                                        WorkflowyListWidget.LOGOUT_EVENT,
-                                        WorkflowyListWidget.class,
-                                        null,
-                                        null
-                                );
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            }
-        });
-
         findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

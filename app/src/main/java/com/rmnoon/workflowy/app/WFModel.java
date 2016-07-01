@@ -3,20 +3,26 @@ package com.rmnoon.workflowy.app;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rmnoon.workflowy.client.BadLoginException;
 import com.rmnoon.workflowy.client.WFClient;
 import com.rmnoon.workflowy.client.WFList;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -39,23 +45,30 @@ public class WFModel {
 
     private static final String TAG = WFModel.class.getName();
 
-    private static final String PREFS_FILE = "WorkflowyListPrefs";
-    private static final String USERNAME_PREF = "WF_UN";
-    private static final String PW_PREF = "WF_PW";
-    private static final String WIDGET_LIST_PREFIX = "W_LST_";
+    private static final String WIDGET_PREFS_FILE = "WidgetPrefs";
+    private static final String WIDGET_PREF_PREFIX = "WIDGET_";
+
+    private static final String GLOBAL_PREFS_FILE = "GlobalPrefs";
+    private static final String USERNAME_PREF = "USER";
+    private static final String PW_PREF = "PW";
+    private static final String VOICE_RECEIVER_PREF = "VOICE_RECEIVER";
 
     private static final String SESSION_FILE = "WorkflowyListSession";
-    private static final String SESSION_PREF = "WF_SESSION";
+    private static final String SESSION_PREF = "SESSION";
 
     private WFClient client;
-    private SharedPreferences prefs, sessionPrefs;
+    private SharedPreferences widgetPrefs, sessionPrefs, globalPrefs;
+    private Gson gson;
 
 
     private WFModel(Context context) {
         Log.i(TAG, "WFModel created: " + UUID.randomUUID().toString());
         this.client = new WFClient();
-        this.prefs = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
+        this.gson = new GsonBuilder().create();
+
+        this.widgetPrefs = context.getSharedPreferences(WIDGET_PREFS_FILE, Context.MODE_PRIVATE);
         this.sessionPrefs = context.getSharedPreferences(SESSION_FILE, Context.MODE_PRIVATE);
+        this.globalPrefs = context.getSharedPreferences(GLOBAL_PREFS_FILE, Context.MODE_PRIVATE);
 
         String savedSession = sessionPrefs.getString(SESSION_PREF, null);
 
@@ -106,11 +119,11 @@ public class WFModel {
     }
 
     public String getConfiguredUsername() {
-        return prefs.getString(USERNAME_PREF, "");
+        return globalPrefs.getString(USERNAME_PREF, "");
     }
 
     private String getConfiguredPassword() {
-        return prefs.getString(PW_PREF, "");
+        return globalPrefs.getString(PW_PREF, "");
     }
 
     public boolean isConfigured() {
@@ -118,7 +131,7 @@ public class WFModel {
     }
 
     public void setConfiguredCredentials(String username, String password) {
-        prefs.edit()
+        globalPrefs.edit()
                 .putString(USERNAME_PREF, username == null ? "" : username)
                 .putString(PW_PREF, password == null ? "" : password)
                 .commit();
@@ -127,19 +140,18 @@ public class WFModel {
     public void ensureAppWidgets(Collection<Integer> widgetIds) {
         if (widgetIds == null) return;
 
-        Map<String, String> toPut = Maps.newHashMap();
+        Map<Integer, WidgetPreferences> toPut = Maps.newHashMap();
         for (Integer appWidgetId : widgetIds) {
-            String key = WIDGET_LIST_PREFIX + appWidgetId;
-            String list = prefs.getString(key, null);
-            if (list == null || list.isEmpty()) {
-                toPut.put(key, "");
+            WidgetPreferences prefs = getPrefsForWidget(appWidgetId);
+            if (prefs == null) {
+                toPut.put(appWidgetId, new WidgetPreferences());
             }
         }
 
         if (!toPut.isEmpty()) {
-            SharedPreferences.Editor editor = prefs.edit();
-            for (Map.Entry<String, String> e : toPut.entrySet()) {
-                editor.putString(e.getKey(), e.getValue());
+            SharedPreferences.Editor editor = widgetPrefs.edit();
+            for (Map.Entry<Integer, WidgetPreferences> e : toPut.entrySet()) {
+                setPrefsForWidget(e.getKey(), e.getValue(), editor);
             }
             editor.commit();
         }
@@ -148,34 +160,78 @@ public class WFModel {
     public void forgetAppWidgets(Collection<Integer> widgetIds) {
         if (widgetIds == null) return;
 
-        SharedPreferences.Editor editor = prefs.edit();
+        int voiceCommandWidget = getWidgetForVoiceCommands();
+
+        SharedPreferences.Editor editor = widgetPrefs.edit();
         for (Integer appWidgetId : widgetIds) {
-            String key = WIDGET_LIST_PREFIX + appWidgetId;
-            editor.remove(key);
+            setPrefsForWidget(appWidgetId, null, editor);
+            if (appWidgetId.equals(voiceCommandWidget)) {
+                setWidgetForVoiceCommands(null);
+            }
         }
         editor.commit();
     }
 
     public void setWidgetList(int appWidgetId, String listId) {
-        prefs.edit() // null or empty listId implies root
-                .putString(WIDGET_LIST_PREFIX + appWidgetId, listId == null ? "" : listId)
-                .commit();
+        WidgetPreferences prefs = getPrefsForWidget(appWidgetId);
+        prefs.listId = listId == null ? "" : listId; // null or empty listid implies root
+        setPrefsForWidget(appWidgetId, prefs, null);
     }
 
     public WFList getWidgetParentList(int appWidgetId) {
-        String listId = prefs.getString(WIDGET_LIST_PREFIX + appWidgetId, null);
+        String listId = getPrefsForWidget(appWidgetId).listId;
         if (listId == null || listId.isEmpty()) { // no setting or empty string implies root lists
             return null;
         }
         return client.isLoggedIn() ? client.getListById(listId) : null;
     }
 
+    public boolean isShowCompleted(int appWidgetId) {
+        Boolean showCompletedItems = getPrefsForWidget(appWidgetId).showCompletedItems;
+        return Objects.equals(showCompletedItems, Boolean.TRUE);
+    }
+
+    public void setShowCompleted(int appWidgetId, boolean showCompleted) {
+        WidgetPreferences prefs = getPrefsForWidget(appWidgetId);
+        prefs.showCompletedItems = showCompleted;
+        setPrefsForWidget(appWidgetId, prefs, null);
+        return;
+    }
+
+    public int getWidgetForVoiceCommands() {
+        // if we don't have an explicit one set, just take the first one
+        int voiceReceiver = globalPrefs.getInt(VOICE_RECEIVER_PREF, AppWidgetManager.INVALID_APPWIDGET_ID);
+        if (voiceReceiver != AppWidgetManager.INVALID_APPWIDGET_ID) return voiceReceiver;
+        for (String prefKey : widgetPrefs.getAll().keySet()) {
+            return Integer.parseInt(prefKey.replace(WIDGET_PREF_PREFIX, ""));
+        }
+        return AppWidgetManager.INVALID_APPWIDGET_ID;
+    }
+
+    public void setWidgetForVoiceCommands(@Nullable Integer appWidgetId) {
+        if (appWidgetId == null || appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            globalPrefs.edit().remove(VOICE_RECEIVER_PREF).commit();
+        } else {
+            globalPrefs.edit().putInt(VOICE_RECEIVER_PREF, appWidgetId).commit();
+        }
+    }
+
     public List<WFList> getListsForWidget(int appWidgetId) {
         if (!client.isLoggedIn()) return Collections.emptyList();
         WFList parent = getWidgetParentList(appWidgetId);
+        boolean showCompleted = isShowCompleted(appWidgetId);
         // null parent implies root lists (or not logged in)
-        List<WFList> rv = parent == null ? getRootLists() : parent.getChildren();
-        return rv == null ? Collections.<WFList>emptyList() : rv;
+        List<WFList> lists = parent == null ? getRootLists() : parent.getChildren();
+        if (lists == null) lists = Collections.emptyList();
+
+        List<WFList> toReturn = Lists.newArrayList();
+        for (WFList l : lists) {
+            if (showCompleted || !l.isComplete()) {
+                toReturn.add(l);
+            }
+        }
+        System.out.println("LISTS FOR " + appWidgetId + " are " + toReturn);
+        return toReturn;
     }
 
     public List<WFList> getRootLists() {
@@ -234,5 +290,27 @@ public class WFModel {
                 .add("rootList count", getRootLists() == null ? 0 : getRootLists().size())
                 .add("username", getConfiguredUsername())
                 .toString();
+    }
+
+    private WidgetPreferences getPrefsForWidget(int appWidgetId) {
+        String serialized = widgetPrefs.getString(WIDGET_PREF_PREFIX + appWidgetId, null);
+        if (serialized == null) return null;
+        return gson.fromJson(serialized, WidgetPreferences.class);
+    }
+
+    private void setPrefsForWidget(int appWidgetId, @Nullable WidgetPreferences prefs, @Nullable SharedPreferences.Editor openEdits) {
+        SharedPreferences.Editor edits = openEdits == null ? widgetPrefs.edit() : openEdits;
+        if (prefs == null) {
+            edits.remove(WIDGET_PREF_PREFIX + appWidgetId);
+        } else {
+            edits.putString(WIDGET_PREF_PREFIX + appWidgetId, gson.toJson(prefs));
+        }
+        if (openEdits == null) edits.commit();
+    }
+
+    public static class WidgetPreferences {
+        public String listId; // no setting or empty string implies root lists
+        public Boolean showCompletedItems;
+        public Boolean disableVoiceCommands;
     }
 }

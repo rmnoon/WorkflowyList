@@ -19,6 +19,7 @@ import com.google.common.primitives.Ints;
 import com.rmnoon.workflowy.app.dialog.ItemActionDialogActivity;
 import com.rmnoon.workflowy.app.dialog.ItemAddEditDialogActivity;
 import com.rmnoon.workflowy.app.dialog.ListPickerDialogActivity;
+import com.rmnoon.workflowy.app.dialog.ListSettingsDialogActivity;
 import com.rmnoon.workflowy.app.dialog.LoginDialogActivity;
 import com.rmnoon.workflowy.client.WFList;
 
@@ -38,6 +39,8 @@ public class WorkflowyListWidget extends AppWidgetProvider {
     public static final String REDRAW_EVENT = "REDRAW_EVENT";
 
     public static final String REFRESH_EVENT = "REFRESH_EVENT";
+
+    public static final String SETTINGS_EVENT = "SETTINGS_EVENT";
 
     public static final String ADD_ITEM_EVENT = "ADD_ITEM_EVENT";
 
@@ -65,9 +68,9 @@ public class WorkflowyListWidget extends AppWidgetProvider {
         String listName = parentList == null ? model.getConfiguredUsername() : parentList.getName();
         rv.setTextViewText(R.id.list_name_button, Html.fromHtml(listName == null ? "" : listName));
 
-        addAdapter(context, rv, appWidgetId, R.id.list_items, R.id.empty_view, WFListViewService.class);
+        addAdapter(context, rv, appWidgetId, R.id.list_items, null, WFListViewService.class);
         addListListener(context, rv, appWidgetId, R.id.list_items, LIST_ITEM_PRESS_EVENT, WorkflowyListWidget.class);
-        addListener(context, rv, appWidgetId, R.id.refresh_button, REFRESH_EVENT, WorkflowyListWidget.class);
+        addListener(context, rv, appWidgetId, R.id.settings_button, SETTINGS_EVENT, WorkflowyListWidget.class);
         addListener(context, rv, appWidgetId, R.id.add_item_button, ADD_ITEM_EVENT, WorkflowyListWidget.class);
         addListener(context, rv, appWidgetId, R.id.list_name_button, PICK_LIST_EVENT, WorkflowyListWidget.class);
         addListener(context, rv, appWidgetId, R.id.log_in_button, LOGIN_EVENT, WorkflowyListWidget.class);
@@ -129,6 +132,14 @@ public class WorkflowyListWidget extends AppWidgetProvider {
                         AppWidgetManager.INVALID_APPWIDGET_ID,
                         WFService.REFRESH_ACTION,
                         null
+                );
+                break;
+            case SETTINGS_EVENT:
+                showDialog(
+                        context,
+                        appWidgetId,
+                        ListSettingsDialogActivity.class,
+                        null, null
                 );
                 break;
             case ADD_ITEM_EVENT:

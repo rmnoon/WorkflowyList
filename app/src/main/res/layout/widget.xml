@@ -15,7 +15,7 @@
             android:id="@+id/log_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="@string/log_in"/>
     </LinearLayout>
 
@@ -41,20 +41,21 @@
             />
 
         <ImageButton
-            android:id="@+id/refresh_button"
+            android:id="@+id/settings_button"
             style="@style/HeaderButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:contentDescription="@string/refresh"
-            android:src="@drawable/button_refresh"/>
+            android:contentDescription="@string/settings"
+            android:src="@drawable/button_settings"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/add_item_button"
             style="@style/HeaderButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/add_item"
-            android:src="@drawable/button_add"/>
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:drawableStart="@drawable/button_add"/>
 
     </LinearLayout>
 
@@ -64,14 +65,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
-
-    <TextView
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:text="@string/empty_list"
-        android:textSize="20sp" />
 
 </LinearLayout>

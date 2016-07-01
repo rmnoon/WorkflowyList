@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
-        android:drawable="@drawable/ic_add_black_24dp" /> <!-- pressed -->
+        android:drawable="@drawable/ic_add_black_36dp" /> <!-- pressed -->
 
     <item android:state_focused="true"
-        android:drawable="@drawable/ic_add_white_24dp" /> <!-- focused -->
+        android:drawable="@drawable/ic_add_white_36dp" /> <!-- focused -->
 
-    <item android:drawable="@drawable/ic_add_white_24dp" /> <!-- default -->
+    <item android:drawable="@drawable/ic_add_white_36dp" /> <!-- default -->
 </selector>

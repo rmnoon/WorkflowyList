@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">WorkflowyList</string>
-    <string name="help_text">Long-press on your home screen to add the widget.</string>
+    <string name="help_text">Press and hold on your Home Screen to add the widget.</string>
 
     <!-- Main widget -->
-    <string name="refresh">Refresh</string>
+
     <string name="add_item">Add Item</string>
-    <string name="empty_list">No items.</string>
     <string name="pick_list">Select a list&#8230;</string>
     <string name="item_bullet">&#8250;</string>
 
@@ -29,11 +28,18 @@
     <string name="path_separator_ltr">&#8250;</string>
     <string name="path_separator_rtl">&#8249;</string>
     <string name="root_list">Main List</string>
-    <string name="logout">Log out</string>
     <string name="logout_confirm">Are you sure you want to log out of Workflowy?</string>
     <string name="up">Go up a level</string>
     <string name="empty_list_choice">Nothing on this list right now.</string>
     <string name="empty">empty</string>
+
+    <!-- Settings dialog -->
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="show_completed">Show Completed</string>
+    <string name="hide_completed">Hide Completed</string>
+    <string name="enable_voice">Enable Voice Commands</string>
+    <string name="logout">Log Out</string>
 
     <!-- Login dialog -->
     <string name="username_hint">Email address</string>
@@ -60,4 +66,7 @@
     <string name="item_deleted">Item deleted.</string>
     <string name="item_deleted_local">Item deleted locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
 
+    <!-- Voice commands -->
+    <string name="not_logged_in">Please login to Workflowy.</string>
+    <string name="no_widgets">Please add a Workflowy widget to your Home Screen.</string>
 </resources>

@@ -62,7 +62,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dip"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorDivider" />
 
     <ListView
         android:id="@+id/list_picker_items"
@@ -90,14 +90,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
-
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/logout"/>
 
         <Button
             android:id="@+id/cancel_button"
