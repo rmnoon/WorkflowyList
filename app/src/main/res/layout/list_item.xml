@@ -5,13 +5,11 @@
     android:id="@+id/list_item"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="12sp"
-    android:layout_marginBottom="12sp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="24sp"
         android:text="@string/item_bullet"
         android:layout_marginTop="6sp"
@@ -19,7 +17,7 @@
         android:layout_marginRight="6sp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -30,7 +28,7 @@
             android:layout_marginTop="12sp"
             android:layout_marginBottom="12sp"
             android:textSize="18sp"
-            android:text="Example item name" />
+            tools:text="Example item name" />
 
         <TextView
             android:id="@+id/item_desc"
@@ -41,7 +39,7 @@
             android:textSize="14sp"
             android:visibility="gone"
             tools:visibility="visible"
-            android:text="Some description that may or may not exist." />
+            tools:text="Some description that may or may not exist." />
     </LinearLayout>
 
 

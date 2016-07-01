@@ -102,6 +102,14 @@ public class ListSettingsDialogActivity extends Activity {
             public void onClick(View v) {
                 ListSettingsDialogActivity.this.finish();
                 model.setShowCompleted(appWidgetId, !model.isShowCompleted(appWidgetId));
+                fireEvent(
+                        getApplicationContext(),
+                        appWidgetId,
+                        WorkflowyListWidget.REDRAW_EVENT,
+                        WorkflowyListWidget.class,
+                        null,
+                        null
+                );
             }
         });
         showCompletedButton.setText(model.isShowCompleted(appWidgetId) ? R.string.hide_completed : R.string.show_completed);

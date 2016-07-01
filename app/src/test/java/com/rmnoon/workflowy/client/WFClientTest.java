@@ -204,7 +204,6 @@ public class WFClientTest {
         String rootName = "root_" + UUID.randomUUID().toString();
         WFList root = client.createRootList(0, rootName, null);
         WFList child = client.createList(root, 0, "child_" + rootName, null);
-        System.out.println(root + " is root");
         assertTrue(root.getChildren().contains(child));
 
         client.deleteList(child);

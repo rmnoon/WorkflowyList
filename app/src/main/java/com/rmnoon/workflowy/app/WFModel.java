@@ -230,7 +230,6 @@ public class WFModel {
                 toReturn.add(l);
             }
         }
-        System.out.println("LISTS FOR " + appWidgetId + " are " + toReturn);
         return toReturn;
     }
 
