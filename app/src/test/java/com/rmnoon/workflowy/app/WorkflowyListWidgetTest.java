@@ -28,13 +28,16 @@ public class WorkflowyListWidgetTest {
         WFTestUtil.clearLists(client);
 
         WFList todo = client.createRootList(0, "todo", "my todo list");
-        WFList buyMilk = client.createList(todo, 0, "buy milk", null);
+        WFList buyMilk = client.createList(todo, 0, "buy blue milk", null);
         WFList buyCereal = client.createList(todo, 1, "buy cereal", null);
+        WFList powerConverts = client.createList(todo, 2, "pick up power converters", "at toshe station");
 
-        WFList ideas = client.createRootList(1, "ideas", "where i keep ideas");
-        WFList cureCancer = client.createList(ideas, 0, "cure cancer", "would totally save lives");
+        WFList ideas = client.createRootList(1, "ideas", "ideas that come to me");
+        WFList supremeExecutivePower = client.createList(ideas, 0, "supreme executive power", "derives from a mandate of the masses");
         WFList gotoSpace = client.createList(ideas, 1, "go to space", null);
         client.completeList(gotoSpace, true);
+        WFList holyRoman = client.createList(ideas, 2, "the holy roman empire", "was neither holy nor roman nor an empire");
+        WFList ifGod = client.createList(ideas, 3, "if god did not exist", "it would be necessary to invent him");
 
         assertEquals(client.getRootLists().size(), 2);
 
@@ -43,7 +46,7 @@ public class WorkflowyListWidgetTest {
         assertEquals(todo.getChild(1), buyCereal);
 
         assertEquals(client.getRootLists().get(1), ideas);
-        assertEquals(ideas.getChild(0), cureCancer);
+        assertEquals(ideas.getChild(0), supremeExecutivePower);
         assertEquals(ideas.getChild(1), gotoSpace);
         assertTrue(gotoSpace.isComplete());
     }

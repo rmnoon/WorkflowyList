@@ -59,13 +59,13 @@ public class WorkflowyListWidget extends AppWidgetProvider {
     public static final String LIST_PICKED_EXTRA_LISTID = "LIST_PICKED_EXTRA_LISTID";
 
     private static void drawWidget(Context context, int appWidgetId) {
-        Log.i(TAG, "Drawing widget: " + appWidgetId);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget);
         WFModel model = WFModel.getInstance(context);
         WFList parentList = model.getWidgetParentList(appWidgetId);
-
         String listName = parentList == null ? model.getConfiguredUsername() : parentList.getName();
+
+        Log.i(TAG, "Drawing widget: " + appWidgetId + ", \"" + listName + "\"");
+
+        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget);
         rv.setTextViewText(R.id.list_name_button, Html.fromHtml(listName == null ? "" : listName));
 
         addAdapter(context, rv, appWidgetId, R.id.list_items, null, WFListViewService.class);
@@ -80,7 +80,7 @@ public class WorkflowyListWidget extends AppWidgetProvider {
         rv.setViewVisibility(R.id.list_items, isConfigured ? View.VISIBLE : View.GONE);
         rv.setViewVisibility(R.id.login_panel, isConfigured ? View.GONE : View.VISIBLE);
 
-        appWidgetManager.updateAppWidget(appWidgetId, rv);
+        AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, rv);
     }
 
     private static void doSilentRefresh(Context context) {
@@ -94,9 +94,7 @@ public class WorkflowyListWidget extends AppWidgetProvider {
     }
 
     private static void redrawWidgets(Context context) {
-        WFModel model = WFModel.getInstance(context);
-        Log.i(TAG, "redrawWidgets: " + model.toString());
-        model.ensureAppWidgets(Ints.asList(getAppWidgetIds(context)));
+        WFModel.getInstance(context).ensureAppWidgets(Ints.asList(getAppWidgetIds(context)));
         notifyListItemsChanged(context);
 
         for (int appWidgetId : getAppWidgetIds(context)) {
@@ -111,7 +109,7 @@ public class WorkflowyListWidget extends AppWidgetProvider {
         // the widget id that sent us this intent (if one sent it, if not it'll be the invalid sentinel)
         int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        Log.i(TAG, "Received: " + intent.getAction());
+        Log.i(TAG, "Received: " + intent.getAction() + ", " + intent.toString() + ", " + intent.getExtras());
 
         switch(intent.getAction()) {
             case ConnectivityManager.CONNECTIVITY_ACTION:

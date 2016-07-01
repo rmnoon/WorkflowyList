@@ -28,7 +28,7 @@ public class AppWidgetUtils {
         Intent intent = new Intent(context, widgetClass)
                 .setAction(action)
                 .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT); // use the appWidgetId as a unique identifier to avoid different instances overwriting each other
         rv.setOnClickPendingIntent(componentId, pendingIntent);
     }
 
