@@ -9,3 +9,11 @@ A Workflowy to-do / note-taking list widget for Android. Includes a nice Workflo
 * Voice recognition on the "Make a note" and "Not to self" voice intents.
 * Pretty list formatting (bold, italic, etc).
 * Material Design theme.
+
+## Screenshots
+![todo list](screenshots/todo.png)
+![add item](screenshots/add-item.png)
+![voice notes](screenshots/voice-notes.png)
+![item actions](screenshots/item-actions.png)
+![widget settings](screenshots/widget-settings.png)
+![choose-list](screenshots/choose-list.png)
