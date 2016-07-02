@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">WorkflowyList</string>
-    <string name="help_text">Press and hold on your Home Screen to add the widget.</string>
+    <string name="app_name">WorkFlowyList</string>
+    <string name="help_text">Press and hold on your Home Screen to add a WorkFlowy widget.</string>
 
     <!-- Main widget -->
-
     <string name="add_item">Add Item</string>
     <string name="pick_list">Select a list&#8230;</string>
     <string name="item_bullet">&#8250;</string>
@@ -28,7 +27,7 @@
     <string name="path_separator_ltr">&#8250;</string>
     <string name="path_separator_rtl">&#8249;</string>
     <string name="root_list">Main List</string>
-    <string name="logout_confirm">Are you sure you want to log out of Workflowy?</string>
+    <string name="logout_confirm">Are you sure you want to log out of WorkFlowy?</string>
     <string name="up">Go up a level</string>
     <string name="empty_list_choice">Nothing on this list right now.</string>
     <string name="empty">empty</string>
@@ -45,28 +44,28 @@
     <string name="username_hint">Email address</string>
     <string name="password_hint">Password</string>
     <string name="log_in">Log in</string>
-    <string name="log_in_header">Log in to Workflowy</string>
+    <string name="log_in_header">Log in to WorkFlowy</string>
     <string name="show_password">Show password</string>
-    <string name="bad_network">Unable to reach Workflowy</string>
+    <string name="bad_network">Unable to reach WorkFlowy</string>
     <string name="bad_login">Incorrect email or password</string>
     <string name="loading">Please wait...</string>
 
     <!-- Statuses -->
-    <string name="cant_refresh">Can\'t refresh (unable to reach Workflowy).  Check your internet connection or try again later.</string>
+    <string name="cant_refresh">Can\'t refresh (unable to reach WorkFlowy).  Check your internet connection or try again later.</string>
     <string name="bad_login_on_refresh">Invalid email or password, please log out and log back in again.</string>
-    <string name ="refresh_success">Successfully synced with Workflowy.</string>
+    <string name ="refresh_success">Successfully synced with WorkFlowy.</string>
     <string name="item_added">Item added.</string>
-    <string name="item_added_local">Item added locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_added_local">Item added locally (unable to reach WorkFlowy).  It will sync when the internet is available.</string>
     <string name="item_edited">Item edited.</string>
-    <string name="item_edited_local">Item edited locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_edited_local">Item edited locally (unable to reach WorkFlowy).  It will sync when the internet is available.</string>
     <string name="item_completed">Item completed.</string>
     <string name="item_uncompleted">Item marked incomplete.</string>
-    <string name="item_completed_local">Item completed locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
-    <string name="item_uncompleted_local">Item marked incomplete locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_completed_local">Item completed locally (unable to reach WorkFlowy).  It will sync when the internet is available.</string>
+    <string name="item_uncompleted_local">Item marked incomplete locally (unable to reach WorkFlowy).  It will sync when the internet is available.</string>
     <string name="item_deleted">Item deleted.</string>
-    <string name="item_deleted_local">Item deleted locally (unable to reach Workflowy).  It will sync when the internet is available.</string>
+    <string name="item_deleted_local">Item deleted locally (unable to reach WorkFlowy).  It will sync when the internet is available.</string>
 
     <!-- Voice commands -->
-    <string name="not_logged_in">Please login to Workflowy.</string>
-    <string name="no_widgets">Please add a Workflowy widget to your Home Screen.</string>
+    <string name="not_logged_in">Please login to WorkFlowy.</string>
+    <string name="no_widgets">Please add a WorkFlowy widget to your Home Screen.</string>
 </resources>

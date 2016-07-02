@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:scrollHorizontally="false"
+        android:maxLines="8"
         android:hint="@string/item_name_hint" />
 
     <CheckBox
@@ -26,6 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:maxLines="8"
         android:hint="@string/item_note_hint"
         android:visibility="gone"/>
 
